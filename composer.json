@@ -1,0 +1,12 @@
+{
+    "name": "citypantry/api-client",
+    "type": "library",
+    "description": "CityPantry API client",
+    "autoload": {
+        "psr-0": { "": "src/"}
+    },
+    "require": {
+        "guzzlehttp/guzzle": "~5.1",
+        "symfony/http-foundation": "~2.6"
+    }
+}
