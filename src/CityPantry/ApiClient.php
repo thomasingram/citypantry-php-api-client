@@ -19,6 +19,8 @@ class ApiClient
 
     private $guzzleClient;
 
+    private $cachedAuthenticatedUserResponse;
+
     /**
      * @param  Request $request
      * @param  string  $endpoint One of `ApiClient::ENDPOINT_*`.
@@ -57,7 +59,11 @@ class ApiClient
 
     public function getAuthenticatedUser()
     {
-        return $this->request('GET', '/users/get-authenticated-user');
+        if ($this->cachedAuthenticatedUserResponse === null) {
+            $this->cachedAuthenticatedUserResponse = $this->request('GET', '/users/get-authenticated-user');
+        }
+
+        return $this->cachedAuthenticatedUserResponse;
     }
 
     /**
