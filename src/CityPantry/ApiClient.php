@@ -22,8 +22,8 @@ class ApiClient
     private $cachedAuthenticatedUserResponse;
 
     /**
-     * @param  Request $request
-     * @param  string  $endpoint One of `ApiClient::ENDPOINT_*`.
+     * @param  Request   $request
+     * @param  string    $endpoint One of `ApiClient::ENDPOINT_*`.
      * @return ApiClient
      */
     public static function createClientFromRequestCookies(Request $request, $endpoint)
@@ -54,6 +54,7 @@ class ApiClient
     public function isLoggedIn()
     {
         $response = $this->request('GET', '/users/get-authenticated-user');
+
         return (int) $response->getStatusCode() === 200;
     }
 
@@ -67,8 +68,8 @@ class ApiClient
     }
 
     /**
-     * @param  string $method
-     * @param  string $path
+     * @param  string                       $method
+     * @param  string                       $path
      * @return \GuzzleHttp\Message\Response
      */
     public function request($method, $path)
