@@ -15,6 +15,12 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase
         $request->cookies->set('userId', 123);
         $request->cookies->set('salt', 'abc');
         $client = ApiClient::createClientFromRequestCookies($request, ApiClient::ENDPOINT_DEV);
+        $guzzleClient = $client->getGuzzleClient();
+
+        $mock = new Mock([
+            new Response(200),
+        ]);
+        $guzzleClient->getEmitter()->attach($mock);
 
         $this->assertTrue($client->isLoggedIn());
     }
@@ -23,6 +29,12 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase
     {
         $request = new Request();
         $client = ApiClient::createClientFromRequestCookies($request, ApiClient::ENDPOINT_DEV);
+        $guzzleClient = $client->getGuzzleClient();
+
+        $mock = new Mock([
+            new Response(401),
+        ]);
+        $guzzleClient->getEmitter()->attach($mock);
 
         $this->assertFalse($client->isLoggedIn());
     }

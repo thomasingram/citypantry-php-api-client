@@ -51,7 +51,8 @@ class ApiClient
 
     public function isLoggedIn()
     {
-        return $this->userId && $this->salt;
+        $response = $this->request('GET', '/users/get-authenticated-user');
+        return (int) $response->getStatusCode() === 200;
     }
 
     public function getAuthenticatedUser()
