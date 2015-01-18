@@ -44,6 +44,11 @@ class ApiClient
         $this->guzzleClient = new GuzzleClient();
     }
 
+    public function getGuzzleClient()
+    {
+        return $this->guzzleClient;
+    }
+
     public function isLoggedIn()
     {
         return $this->userId && $this->salt;
@@ -54,6 +59,11 @@ class ApiClient
         return $this->request('GET', '/users/get-authenticated-user');
     }
 
+    /**
+     * @param  string $method
+     * @param  string $path
+     * @return \GuzzleHttp\Message\Response
+     */
     public function request($method, $path)
     {
         $method = strtoupper($method);
